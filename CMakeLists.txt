@@ -42,6 +42,7 @@ SET(UI_FILES
 
 SET(TEST_FILES
     test/testautomatatape.cpp
+    test/testtransitionfunction.cpp
     )
 
 add_executable(PushdownAutomata
