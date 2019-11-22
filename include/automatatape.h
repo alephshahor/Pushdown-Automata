@@ -9,8 +9,12 @@ class AutomataTape{
     char* mCurrentSymbol;
 
   public:
-    AutomataTape(std::string inputString, std::set<char> alphabet);
+    AutomataTape(std::set<char> alphabet);
+    AutomataTape();
+
     char currentSymbol() const;
+
+    void setInputString(std::string inputString);
 
     /*!
      * \brief shift increments the mCurrentSymbol pointer to the next
@@ -18,7 +22,10 @@ class AutomataTape{
      */
     void shift();
 
-  private:
+    std::set<char> alphabet() const;
+    void setAlphabet(const std::set<char> &alphabet);
+
+private:
 
     void checkInputIsValid() const;
     bool isInAlphabet(char symbol) const;

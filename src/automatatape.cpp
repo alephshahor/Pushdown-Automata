@@ -2,17 +2,30 @@
 #include <stdexcept>
 
 //TODO: Handle the exception in case that the input string is not valid.
-AutomataTape::AutomataTape(std::__cxx11::string inputString, std::set<char> alphabet):
-    mInputString(inputString),
-    mAlphabet(alphabet)
+
+AutomataTape::AutomataTape(std::set<char> alphabet):
+    mAlphabet(alphabet),
+    mCurrentSymbol(nullptr)
 {
-    mCurrentSymbol = &mInputString[0];
-    checkInputIsValid();
+}
+
+AutomataTape::AutomataTape()
+{
+
 }
 
 char AutomataTape::currentSymbol() const
 {
-    return *mCurrentSymbol;
+    if(mCurrentSymbol)
+         return *mCurrentSymbol;
+    else return NULL;
+}
+
+void AutomataTape::setInputString(std::string inputString)
+{
+    mInputString = inputString;
+    mCurrentSymbol = &mInputString[0];
+    checkInputIsValid();
 }
 
 void AutomataTape::shift()
@@ -47,4 +60,13 @@ bool AutomataTape::isInAlphabet(char symbol) const
     return false;
 }
 
+// TODO: This functions should be deleted when testing is finished.
+std::set<char> AutomataTape::alphabet() const
+{
+    return mAlphabet;
+}
 
+void AutomataTape::setAlphabet(const std::set<char> &alphabet)
+{
+    mAlphabet = alphabet;
+}

@@ -24,6 +24,7 @@ set(INCLUDE_FILES
     include/automatastack.h
     include/automatastate.h
     include/transitionfunction.h
+    include/utilities.h
     test/catch.hpp
     )
 
@@ -34,6 +35,7 @@ SET(SOURCE_FILES
     src/automatastack.cpp
     src/automatastate.cpp
     src/transitionfunction.cpp
+    src/utilities.cpp
     main.cpp)
 
 SET(UI_FILES
@@ -45,6 +47,8 @@ SET(TEST_FILES
     test/testtransitionfunction.cpp
     test/testautomatastate.cpp
     test/testautomatastack.cpp
+    test/testutilities.cpp
+    test/testpushdownautomata.cpp
     )
 
 add_executable(PushdownAutomata
@@ -53,5 +57,7 @@ add_executable(PushdownAutomata
   ${UI_FILES}
   ${TEST_FILES}
 )
+
+target_compile_definitions(PushdownAutomata PUBLIC CURRENT_DIRECTORY="${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_link_libraries(PushdownAutomata PRIVATE Qt5::Widgets)

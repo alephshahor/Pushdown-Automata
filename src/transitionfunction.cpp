@@ -1,6 +1,6 @@
 #include "../include/transitionfunction.h"
 
-TransitionFunction::TransitionFunction(char inputSymbol, char popSymbol, std::vector<char> pushSymbols, char nextState):
+TransitionFunction::TransitionFunction(char inputSymbol, char popSymbol, std::vector<char> pushSymbols, std::string nextState):
     mInputSymbol(inputSymbol),
     mPopSymbol(popSymbol),
     mPushSymbols(pushSymbols),
@@ -20,7 +20,7 @@ std::vector<char> TransitionFunction::pushSymbols() const
     return mPushSymbols;
 }
 
-char TransitionFunction::nextState() const
+std::string TransitionFunction::nextState() const
 {
     return mNextState;
 }

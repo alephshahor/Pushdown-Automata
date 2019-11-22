@@ -1,15 +1,17 @@
 #include "transitionfunction.h"
+#include <string>
 
 class AutomataState{
 
     private:
-        char mIdentifier;
+        std::string mIdentifier;
+        bool        mAcceptationState;
         std::vector<TransitionFunction> mTransitionFunctions;
 
     public:
 
-        AutomataState(char identifier);
-        char identifier() const;
+        AutomataState(std::string identifier);
+        std::string identifier() const;
         void insertTransitionFunction(TransitionFunction function);
 
         /*!
@@ -20,8 +22,12 @@ class AutomataState{
          */
         std::vector<TransitionFunction> transitionFunction(char symbol);
         bool operator<(AutomataState& other) const;
+        bool operator ==(AutomataState &other) const;
 
 
+        bool acceptationState() const;
+        void setAcceptationState(bool acceptationState);
 
-
+        std::vector<TransitionFunction> transitionFunctions() const;
+        void setTransitionFunctions(const std::vector<TransitionFunction> &transitionFunctions);
 };

@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 class TransitionFunction{
 
@@ -7,16 +8,16 @@ class TransitionFunction{
         char mInputSymbol;
         char mPopSymbol;
         std::vector<char> mPushSymbols;
-        char  mNextState;
+        std::string  mNextState;
 
 
     public:
 
-        TransitionFunction(char inputSymbol, char popSymbol, std::vector<char> pushSymbols, char nextState);
+        TransitionFunction(char inputSymbol, char popSymbol, std::vector<char> pushSymbols, std::string nextState);
 
         char popSymbol() const;
         std::vector<char> pushSymbols() const;
-        char nextState() const;
+        std::string nextState() const;
         char inputSymbol() const;
 
 };

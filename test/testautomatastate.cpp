@@ -11,21 +11,26 @@ bool areEqual(TransitionFunction f1, TransitionFunction f2){
 }
 
 TEST_CASE("Automata State is constructed properly"){
-    AutomataState automataState('r');
+    AutomataState automataState("r");
 }
 
 TEST_CASE("Automata State identifier is defined"){
-    AutomataState automataState('r');
-    REQUIRE(automataState.identifier() == 'r');
+    AutomataState automataState("r");
+    REQUIRE(automataState.identifier() == "r");
+}
+
+TEST_CASE("Automata State is by default false"){
+    AutomataState automataState("r");
+    REQUIRE(automataState.acceptationState() == false);
 }
 
 TEST_CASE("Automata State's transition functions work properly"){
     std::vector<char> pushSymbols = {'A','B'};
-    TransitionFunction transitionFunction('a','b',pushSymbols,'1');
-    TransitionFunction transitionFunction2('a','c',pushSymbols,'1');
-    TransitionFunction transitionFunction3('b','c',pushSymbols,'1');
+    TransitionFunction transitionFunction('a','b',pushSymbols,"1");
+    TransitionFunction transitionFunction2('a','c',pushSymbols,"1");
+    TransitionFunction transitionFunction3('b','c',pushSymbols,"1");
 
-    AutomataState automataState('r');
+    AutomataState automataState("r");
     automataState.insertTransitionFunction(transitionFunction);
     automataState.insertTransitionFunction(transitionFunction2);
     automataState.insertTransitionFunction(transitionFunction3);

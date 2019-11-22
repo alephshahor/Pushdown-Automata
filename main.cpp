@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     if(result > 0){
         return result;
     }else{
-        PushdownAutomata automata("/home/hyydra/PushdownAutomata/inputs/APf.txt");
+        PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf.txt");
 //        QApplication a(argc, argv);
 //        MainWindow w;
 //        w.show();

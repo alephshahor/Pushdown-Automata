@@ -1,9 +1,14 @@
 #include "include/automatastack.h"
 #include <stdexcept>
 
-
-AutomataStack::AutomataStack(std::set<char> alphabet):
+AutomataStack::AutomataStack(std::set<char> alphabet, char initialSymbol):
+    mInitialSymbol(initialSymbol),
     mAlphabet(alphabet)
+{
+    push(mInitialSymbol);
+}
+
+AutomataStack::AutomataStack()
 {
 
 }
@@ -35,3 +40,36 @@ bool AutomataStack::isInAlphabet(char symbol)
 
         return false;
 }
+
+// TODO: Remove this methods when testing is finished
+
+std::stack<char> AutomataStack::stack() const
+{
+    return mStack;
+}
+
+void AutomataStack::setStack(const std::stack<char> &stack)
+{
+    mStack = stack;
+}
+
+char AutomataStack::initialSymbol() const
+{
+    return mInitialSymbol;
+}
+
+void AutomataStack::setInitialSymbol(char initialSymbol)
+{
+    mInitialSymbol = initialSymbol;
+}
+
+std::set<char> AutomataStack::alphabet() const
+{
+    return mAlphabet;
+}
+
+void AutomataStack::setAlphabet(const std::set<char> &alphabet)
+{
+    mAlphabet = alphabet;
+}
+

@@ -1,13 +1,14 @@
 #include "include/automatastate.h"
 
-AutomataState::AutomataState(char identifier):
+AutomataState::AutomataState(std::string identifier):
     mIdentifier(identifier),
+    mAcceptationState(false),
     mTransitionFunctions()
 {
 
 }
 
-char AutomataState::identifier() const
+std::string AutomataState::identifier() const
 {
     return mIdentifier;
 }
@@ -33,4 +34,30 @@ bool AutomataState::operator<(AutomataState &other) const
     return other.identifier() < mIdentifier;
 }
 
+bool AutomataState::operator==(AutomataState &other) const
+{
+    return other.identifier() == mIdentifier;
+}
 
+bool AutomataState::acceptationState() const
+{
+    return mAcceptationState;
+}
+
+void AutomataState::setAcceptationState(bool acceptationState)
+{
+    mAcceptationState = acceptationState;
+}
+
+
+//TODO: Remove this functions when tests are done.
+
+std::vector<TransitionFunction> AutomataState::transitionFunctions() const
+{
+    return mTransitionFunctions;
+}
+
+void AutomataState::setTransitionFunctions(const std::vector<TransitionFunction> &transitionFunctions)
+{
+    mTransitionFunctions = transitionFunctions;
+}
