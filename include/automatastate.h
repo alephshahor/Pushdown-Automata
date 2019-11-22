@@ -3,12 +3,13 @@
 class AutomataState{
 
     private:
-
+        char mIdentifier;
         std::vector<TransitionFunction> mTransitionFunctions;
 
     public:
 
-        AutomataState();
+        AutomataState(char identifier);
+        char identifier() const;
         void insertTransitionFunction(TransitionFunction function);
 
         /*!
@@ -18,6 +19,7 @@ class AutomataState{
          * as input.
          */
         std::vector<TransitionFunction> transitionFunction(char symbol);
+        bool operator<(AutomataState& other) const;
 
 
 

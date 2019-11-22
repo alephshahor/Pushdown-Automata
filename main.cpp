@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_RUNNER
 #include "mainwindow.h"
+#include "include/pushdownautomata.h"
 #include "test/catch.hpp"
 #include <iostream>
 #include <QApplication>
@@ -13,9 +14,10 @@ int main(int argc, char *argv[])
     if(result > 0){
         return result;
     }else{
-        QApplication a(argc, argv);
-        MainWindow w;
-        w.show();
-        return a.exec();
+        PushdownAutomata automata("/home/hyydra/PushdownAutomata/inputs/APf.txt");
+//        QApplication a(argc, argv);
+//        MainWindow w;
+//        w.show();
+//        return a.exec();
     }
 }

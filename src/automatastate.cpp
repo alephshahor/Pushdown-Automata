@@ -1,9 +1,15 @@
 #include "include/automatastate.h"
 
-AutomataState::AutomataState():
+AutomataState::AutomataState(char identifier):
+    mIdentifier(identifier),
     mTransitionFunctions()
 {
 
+}
+
+char AutomataState::identifier() const
+{
+    return mIdentifier;
 }
 
 void AutomataState::insertTransitionFunction(TransitionFunction function)
@@ -21,3 +27,10 @@ std::vector<TransitionFunction> AutomataState::transitionFunction(char symbol)
     }
     return functions;
 }
+
+bool AutomataState::operator<(AutomataState &other) const
+{
+    return other.identifier() < mIdentifier;
+}
+
+
