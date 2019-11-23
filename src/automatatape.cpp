@@ -18,7 +18,16 @@ char AutomataTape::currentSymbol() const
 {
     if(mCurrentSymbol)
          return *mCurrentSymbol;
-    else return NULL;
+    else return '.';
+}
+
+char AutomataTape::getSymbol(int position) const
+{
+    if(mInputString.size() - 1 < position){
+//        throw std::runtime_error("Error, trying to access to a symbol of the input string out of range.");
+        return '.';
+    }
+    return mInputString[position];
 }
 
 void AutomataTape::setInputString(std::string inputString)

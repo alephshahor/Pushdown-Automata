@@ -15,6 +15,9 @@ int main(int argc, char *argv[])
         return result;
     }else{
         PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf.txt");
+        if(automata.isAccepted("aabb")){
+            std::cout << "Is accepted\n";
+        }else std::cout << "Is not accepted\n";
 //        QApplication a(argc, argv);
 //        MainWindow w;
 //        w.show();

@@ -23,7 +23,7 @@ TEST_CASE("Pushdown Automata construction"){
         AutomataTape tape = automata.tape();
         REQUIRE(tape.alphabet() == tapeAlphabet);
         REQUIRE(tape.alphabet() != notTapeAlphabet);
-        REQUIRE(tape.currentSymbol() == NULL);
+        REQUIRE(tape.currentSymbol() == '.');
     }
 
     SECTION("The stack is properly constructed"){
@@ -99,7 +99,20 @@ TEST_CASE("Pushdown Automata construction"){
 
 
     }
+}
 
+TEST_CASE("Pushdown Automata input strings"){
+    SECTION("Input Apf.txt"){
+        PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf.txt");
+      //  REQUIRE(automata.isAccepted("") == false);
+        REQUIRE(automata.isAccepted("a") == false);
+        REQUIRE(automata.isAccepted("b") == false);
+        REQUIRE(automata.isAccepted("ab") == true);
+        REQUIRE(automata.isAccepted("aabb") == true);
+        REQUIRE(automata.isAccepted("aaabbb") == true);
+        REQUIRE(automata.isAccepted("aaaabb") == false);
+        REQUIRE(automata.isAccepted("aabbbb") == false);
+    }
 }
 
 

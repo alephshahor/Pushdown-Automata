@@ -13,6 +13,7 @@ class AutomataTape{
     AutomataTape();
 
     char currentSymbol() const;
+    char getSymbol(int position) const;
 
     void setInputString(std::string inputString);
 

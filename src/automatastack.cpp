@@ -25,10 +25,30 @@ void AutomataStack::push(char symbol)
     }
 }
 
+void AutomataStack::push(std::vector<char> symbols)
+{
+    for(int i = symbols.size() - 1; i >= 0; i--){
+        if(symbols[i] != '.')
+            mStack.push(symbols[i]);
+    }
+}
+
 char AutomataStack::pop(){
     char topSymbol = mStack.top();
     mStack.pop();
     return topSymbol;
+}
+
+void AutomataStack::reset()
+{
+    while(!mStack.empty()){
+        mStack.pop();
+    }
+    mStack.push(mInitialSymbol);
+}
+
+char AutomataStack::top(){
+    return mStack.top();
 }
 
 bool AutomataStack::isInAlphabet(char symbol)

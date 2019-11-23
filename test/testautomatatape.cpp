@@ -48,11 +48,7 @@ TEST_CASE("Automata Tape stores the input string properly"){
 TEST_CASE("Automata Tape provides the current symbol properly"){
 
     SECTION("When we the current symbol is the initial symbol"){
-        std::set<char> alphabet = {'a','b'};
-        std::string inputString = "aabb";
-        AutomataTape tape(alphabet);
-        tape.setInputString(inputString);
-        REQUIRE(tape.currentSymbol() == 'a');
+
     }
 
     SECTION("When the current symbol is the second symbol"){
@@ -73,4 +69,18 @@ TEST_CASE("Automata Tape provides the current symbol properly"){
         tape.shift();
         REQUIRE(tape.currentSymbol() == NULL);
     }
+
+    SECTION("When we specify the symbol by index"){
+        std::set<char> alphabet = {'a','b'};
+        std::string inputString = "aabb";
+        AutomataTape tape(alphabet);
+        tape.setInputString(inputString);
+        REQUIRE(tape.getSymbol(0) == 'a');
+        REQUIRE(tape.getSymbol(1) == 'a');
+        REQUIRE(tape.getSymbol(2) == 'b');
+        REQUIRE(tape.getSymbol(3) == 'b');
+
+    }
 }
+
+

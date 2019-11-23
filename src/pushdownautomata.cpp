@@ -204,3 +204,64 @@ AutomataState *PushdownAutomata::initialState() const
 {
     return mInitialState;
 }
+
+// ---------------------------------------------------------
+
+
+void PushdownAutomata::setInputString(std::string inputString)
+{
+    mTape.setInputString(inputString);
+}
+
+bool PushdownAutomata::isAccepted(std::string inputString)
+{
+    // In case that trash values are stored from previous
+    // inputs.
+    mStack.reset();
+
+    setInputString(inputString);
+    bool solutionFound = false;
+    runMachine(mInitialState, solutionFound, 0);
+    return solutionFound;
+}
+
+
+int maxIterations = 0;
+
+void PushdownAutomata::runMachine(AutomataState *state, bool &solutionFound, int currentSymbol)
+{
+    if(maxIterations < 100){
+    maxIterations += 1;
+
+    mCurrentState = state;
+    if(state -> acceptationState()){
+        solutionFound = true;
+        return;
+    }
+
+//    std::cout << "Current state: " << state -> identifier() << "\n";
+//    std::cout << "Current symbol: " << mTape.getSymbol(currentSymbol) << "\n";
+//    std::cout << "Current symbol: " << currentSymbol << "\n";
+//    std::cout << "Current stack top: "  << mStack.stack().top() << "\n";
+//    std::cout << "--------------------\n";
+    
+    std::vector<TransitionFunction> transitionFunctions = state -> transitionFunction(mTape.getSymbol(currentSymbol));
+    for(auto transition : transitionFunctions){
+        if(!solutionFound){
+            char popSymbol = transition.popSymbol();
+            std::vector<char> pushSymbols = transition.pushSymbols();
+            std::string nextState = transition.nextState();
+            std::cout << "Number of possible transitions: " << transitionFunctions.size() << "\n";
+            std::cout << "Current popsymbol: " << popSymbol << "\n";
+            std::cout << "Next state: " << nextState << "\n";
+            std::cout << "--------------------\n";
+            if(popSymbol == mStack.top()){
+                mStack.pop();
+                mStack.push(pushSymbols);
+                std::cout << "Im leaving!\n";
+                runMachine(&(*findState(nextState)), solutionFound, currentSymbol + 1);
+            }
+         }
+       }
+   }
+}
