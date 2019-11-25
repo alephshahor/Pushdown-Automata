@@ -1,4 +1,6 @@
 #include "../include/transitionfunction.h"
+#include "include/utilities.h"
+#include <iostream>
 
 TransitionFunction::TransitionFunction(char inputSymbol, char popSymbol, std::vector<char> pushSymbols, std::string nextState):
     mInputSymbol(inputSymbol),
@@ -7,6 +9,13 @@ TransitionFunction::TransitionFunction(char inputSymbol, char popSymbol, std::ve
     mNextState(nextState)
 {
 
+}
+
+void TransitionFunction::printTransitionFunction()
+{
+    std::cout << mInputSymbol << "," << mPopSymbol << " ----> ";
+    Utilities::printVector(mPushSymbols);
+    std::cout << mNextState << "\n";
 }
 
 

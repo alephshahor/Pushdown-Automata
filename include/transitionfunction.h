@@ -15,6 +15,8 @@ class TransitionFunction{
 
         TransitionFunction(char inputSymbol, char popSymbol, std::vector<char> pushSymbols, std::string nextState);
 
+        void printTransitionFunction();
+
         char popSymbol() const;
         std::vector<char> pushSymbols() const;
         std::string nextState() const;

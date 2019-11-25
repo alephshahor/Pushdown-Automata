@@ -8,6 +8,13 @@ AutomataStack::AutomataStack(std::set<char> alphabet, char initialSymbol):
     push(mInitialSymbol);
 }
 
+AutomataStack::AutomataStack(const AutomataStack &other)
+{
+    mAlphabet = other.alphabet();
+    mStack = other.stack();
+    mInitialSymbol = other.initialSymbol();
+}
+
 AutomataStack::AutomataStack()
 {
 
@@ -37,6 +44,18 @@ char AutomataStack::pop(){
     char topSymbol = mStack.top();
     mStack.pop();
     return topSymbol;
+}
+
+void AutomataStack::printStack()
+{
+
+     std::stack<char> copyStack = mStack;
+         while(copyStack.size() > 0){
+               std::cout << copyStack.top() << " ";
+               copyStack.pop();
+         }
+         std::cout << "\n";
+
 }
 
 void AutomataStack::reset()

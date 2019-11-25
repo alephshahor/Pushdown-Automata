@@ -1,6 +1,7 @@
 #include <stack>
 #include <set>
 #include <vector>
+#include <iostream>
 
 class AutomataStack{
 
@@ -14,12 +15,15 @@ class AutomataStack{
     public:
 
         AutomataStack(std::set<char> alphabet, char initialSymbol);
+        AutomataStack(const AutomataStack& other);
         AutomataStack();
 
         void push(char symbol);
         void push(std::vector<char> symbols);
         char top();
         char pop();
+
+        void printStack();
 
         void reset();
 

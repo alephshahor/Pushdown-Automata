@@ -22,7 +22,7 @@ std::vector<TransitionFunction> AutomataState::transitionFunction(char symbol)
 {
     std::vector<TransitionFunction> functions;
     for(auto function : mTransitionFunctions){
-        if(function.inputSymbol() == symbol){
+        if(function.inputSymbol() == symbol || function.inputSymbol() == '.'){
             functions.push_back(function);
         }
     }

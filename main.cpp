@@ -14,12 +14,12 @@ int main(int argc, char *argv[])
     if(result > 0){
         return result;
     }else{
-        PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf.txt");
-        if(automata.isAccepted("aabb")){
+        PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf-2.txt");
+        if(automata.isAccepted("11")){
             std::cout << "Is accepted\n";
         }else std::cout << "Is not accepted\n";
 //        QApplication a(argc, argv);
-//        MainWindow w;
+//        MainWindow w;q
 //        w.show();
 //        return a.exec();
     }

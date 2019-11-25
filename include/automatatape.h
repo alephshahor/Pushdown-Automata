@@ -12,10 +12,13 @@ class AutomataTape{
     AutomataTape(std::set<char> alphabet);
     AutomataTape();
 
+    int inputSize() const;
+
     char currentSymbol() const;
-    char getSymbol(int position) const;
+    char getSymbol(int position);
 
     void setInputString(std::string inputString);
+    void printTape();
 
     /*!
      * \brief shift increments the mCurrentSymbol pointer to the next

@@ -21,5 +21,21 @@ namespace Utilities {
             return splitedString;
         }
     }
+
+    void printVector(std::vector<char> v_)
+    {
+        for(auto element : v_){
+            std::cout << element << " ";
+        }
+    }
+
+    void tabulate(int ammount)
+    {
+        for(int i = 0; i < ammount * 2; i++){
+            std::cout << "\t";
+        }
+        std::cout << "|->";
+    }
+
 }
 

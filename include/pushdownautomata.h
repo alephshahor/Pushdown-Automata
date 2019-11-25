@@ -35,7 +35,7 @@ class PushdownAutomata{
         void setInputString(std::string inputString);
 
         bool isAccepted(std::string inputString);
-        void runMachine(AutomataState* state, bool& solutionFound, int currentSymbol);
+        void runMachine(AutomataState* state, AutomataStack currentStack, bool& solutionFound, int currentSymbol);
 
 private:
 

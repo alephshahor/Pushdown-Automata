@@ -1,5 +1,6 @@
 # Automata por estados finales 
-# epsilon esta representado por un .
+# epsilon esta representado por un . 
+# (0|1)*
 p q r
 0 1
 0 1 S

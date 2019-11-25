@@ -1,5 +1,6 @@
 #include "../include/automatatape.h"
 #include <stdexcept>
+#include <iostream>
 
 //TODO: Handle the exception in case that the input string is not valid.
 
@@ -14,17 +15,22 @@ AutomataTape::AutomataTape()
 
 }
 
+int AutomataTape::inputSize() const
+{
+ return mInputString.size();
+}
+
 char AutomataTape::currentSymbol() const
 {
     if(mCurrentSymbol)
          return *mCurrentSymbol;
-    else return '.';
 }
 
-char AutomataTape::getSymbol(int position) const
+char AutomataTape::getSymbol(int position)
 {
     if(mInputString.size() - 1 < position){
 //        throw std::runtime_error("Error, trying to access to a symbol of the input string out of range.");
+        mCurrentSymbol = &mInputString[mInputString.size() -1];
         return '.';
     }
     return mInputString[position];
@@ -35,6 +41,11 @@ void AutomataTape::setInputString(std::string inputString)
     mInputString = inputString;
     mCurrentSymbol = &mInputString[0];
     checkInputIsValid();
+}
+
+void AutomataTape::printTape()
+{
+    std::cout << mInputString << "\n";
 }
 
 void AutomataTape::shift()
