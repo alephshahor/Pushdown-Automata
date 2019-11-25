@@ -33,52 +33,49 @@ PushdownAutomata::PushdownAutomata(std::string programFilePath)
     std::getline(programReader_, statesIdentifiers);
     createStates(statesIdentifiers);
 
-    std::cout << "State Identifiers: " << statesIdentifiers << "\n";
+//    std::cout << "State Identifiers: " << statesIdentifiers << "\n";
 
     std::string tapeAlphabet;
     std::getline(programReader_, tapeAlphabet);
     mTape = AutomataTape(createAlphabet(tapeAlphabet));
 
-    std::cout << "Tape: ";
-    mTape.printTape();
-
 
     std::string stackAlphabet;
     std::getline(programReader_, stackAlphabet);
 
-    std::cout << "Stack alphabet: " << stackAlphabet << "\n";
+//    std::cout << "Stack alphabet: " << stackAlphabet << "\n";
 
 
     std::string initialStateIdentifier;
     std::getline(programReader_, initialStateIdentifier);
     setInitialState(initialStateIdentifier);
 
-    std::cout << "Initial State Identifier: " << initialStateIdentifier << "\n";
+//    std::cout << "Initial State Identifier: " << initialStateIdentifier << "\n";
 
     std::string initialStackSymbol;
     std::getline(programReader_, initialStackSymbol);
     mStack = AutomataStack(createAlphabet(stackAlphabet), static_cast<char>(initialStackSymbol[0]));
 
-    std::cout << "Initial Stack Symbol: " << initialStackSymbol << "\n";
+//    std::cout << "Initial Stack Symbol: " << initialStackSymbol << "\n";
 
     std::string acceptationStatesIdentifiers;
     std::getline(programReader_, acceptationStatesIdentifiers);
     setAcceptationStates(acceptationStatesIdentifiers);
 
-    std::cout << "Acceptation States Identifiers: " << acceptationStatesIdentifiers << "\n";
+//    std::cout << "Acceptation States Identifiers: " << acceptationStatesIdentifiers << "\n";
 
     std::string transitionFunction;
     while(std::getline(programReader_, transitionFunction)){
         setTransitionFunction(transitionFunction);
-        std::cout << "Transition Function: " << transitionFunction << "\n";
+//        std::cout << "Transition Function: " << transitionFunction << "\n";
     }
 
-    for( auto state : mStates){
-        for(auto transitionFunction : state.transitionFunctions()){
-            std::cout << state.identifier() << ": ";
-            transitionFunction.printTransitionFunction();
-        }
-    }
+//    for( auto state : mStates){
+//        for(auto transitionFunction : state.transitionFunctions()){
+//            std::cout << state.identifier() << ": ";
+//            transitionFunction.printTransitionFunction();
+//        }
+//    }
 }
 
 void PushdownAutomata::removeComments(std::string &program)
@@ -237,23 +234,23 @@ void PushdownAutomata::setInputString(std::string inputString)
     mTape.setInputString(inputString);
 }
 
-bool PushdownAutomata::isAccepted(std::string inputString)
+bool PushdownAutomata::isAccepted(std::string inputString, bool verbose)
 {
     // In case that trash values are stored from previous
     // inputs.
     mStack.reset();
+    Utilities::depthCounter = 0;
 
     setInputString(inputString);
     bool solutionFound = false;
-    runMachine(mInitialState, mStack, solutionFound, 0);
+    runMachine(mInitialState, mStack, solutionFound, 0, verbose);
     return solutionFound;
 }
 
 
 int maxIterations = 0;
-int depth = 0;
 
-void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentStack, bool &solutionFound, int currentSymbol)
+void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentStack, bool &solutionFound, int currentSymbol, bool& verbose)
 {
     if(maxIterations < 100){
     maxIterations += 1;
@@ -268,10 +265,7 @@ void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentSta
 
     
     std::vector<TransitionFunction> transitionFunctions = state -> transitionFunction(mTape.getSymbol(currentSymbol));
-//    std::cout << "Transition functions: \n";
-//    for(auto transition: transitionFunctions){
-//        transition.printTransitionFunction();
-//    }
+
     for(auto transition : transitionFunctions){
         AutomataStack currentStackCopy(currentStack);
         if(!solutionFound){
@@ -280,33 +274,37 @@ void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentSta
             std::string nextState = transition.nextState();
             if(popSymbol == currentStackCopy.top()){
 
-
-                std::cout << "\n";
-                Utilities::tabulate(depth);
-                std::cout << "STATE: " << state -> identifier() << "\n";
-                Utilities::tabulate(depth);
-                std::cout << "STACK : ";
-                currentStack.printStack();
-                Utilities::tabulate(depth);
-                std::cout << state->identifier() << ": ";
-                transition.printTransitionFunction();
-
+                if(verbose){
+                    printMachineInformation(state -> identifier(), currentStack, transition);
+                }
 
                 currentStackCopy.pop();
                 currentStackCopy.push(pushSymbols);
 
                 if(transition.inputSymbol() != '.'){
-                    depth += 1;
-                    runMachine(&(*findState(nextState)), currentStackCopy, solutionFound, currentSymbol + 1);
-                    depth -= 1;
+                    Utilities::depthCounter += 1;
+                    runMachine(&(*findState(nextState)), currentStackCopy, solutionFound, currentSymbol + 1, verbose);
+                    Utilities::depthCounter -= 1;
                 }else{
-                    depth += 1;
-                    runMachine(&(*findState(nextState)), currentStackCopy, solutionFound, currentSymbol);
-                    depth -= 1;
+                    Utilities::depthCounter += 1;
+                    runMachine(&(*findState(nextState)), currentStackCopy, solutionFound, currentSymbol, verbose);
+                    Utilities::depthCounter -= 1;
                 }
 
             }
          }
        }
    }
+}
+
+void PushdownAutomata::printMachineInformation(std::string stateIdentifier, AutomataStack& currentStack, TransitionFunction& transition){
+    std::cout << "\n";
+    Utilities::tabulate(Utilities::depthCounter);
+    std::cout << "STATE: " << stateIdentifier << "\n";
+    Utilities::tabulate(Utilities::depthCounter);
+    std::cout << "STACK : ";
+    currentStack.printStack();
+    Utilities::tabulate(Utilities::depthCounter);
+    std::cout << stateIdentifier << ": ";
+    transition.printTransitionFunction();
 }

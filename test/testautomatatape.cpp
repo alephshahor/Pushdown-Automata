@@ -51,24 +51,24 @@ TEST_CASE("Automata Tape provides the current symbol properly"){
 
     }
 
-    SECTION("When the current symbol is the second symbol"){
-        std::set<char> alphabet = {'a','b'};
-        std::string inputString = "ab";
-        AutomataTape tape(alphabet);
-        tape.setInputString(inputString);
-        tape.shift();
-        REQUIRE(tape.currentSymbol() == 'b');
-    }
+//    SECTION("When the current symbol is the second symbol"){
+//        std::set<char> alphabet = {'a','b'};
+//        std::string inputString = "ab";
+//        AutomataTape tape(alphabet);
+//        tape.setInputString(inputString);
+//        tape.shift();
+//        REQUIRE(tape.currentSymbol() == 'b');
+//    }
 
-    SECTION("When the current symbol is the last symbol"){
-        std::set<char> alphabet = {'a','b'};
-        std::string inputString = "ab";
-        AutomataTape tape(alphabet);
-        tape.setInputString(inputString);
-        tape.shift();
-        tape.shift();
-        REQUIRE(tape.currentSymbol() == NULL);
-    }
+//    SECTION("When the current symbol is the last symbol"){
+//        std::set<char> alphabet = {'a','b'};
+//        std::string inputString = "ab";
+//        AutomataTape tape(alphabet);
+//        tape.setInputString(inputString);
+//        tape.shift();
+//        tape.shift();
+//        REQUIRE(tape.currentSymbol() == NULL);
+//    }
 
     SECTION("When we specify the symbol by index"){
         std::set<char> alphabet = {'a','b'};

@@ -20,17 +20,18 @@ int AutomataTape::inputSize() const
  return mInputString.size();
 }
 
-char AutomataTape::currentSymbol() const
-{
-    if(mCurrentSymbol)
-         return *mCurrentSymbol;
-}
+//char AutomataTape::currentSymbol() const
+//{
+//    if(mCurrentSymbol)
+//         return *mCurrentSymbol;
+//    else return '.';
+//}
 
 char AutomataTape::getSymbol(int position)
 {
-    if(mInputString.size() - 1 < position){
+    if(mInputString.size() == 0 || mInputString.size() - 1 < position){
 //        throw std::runtime_error("Error, trying to access to a symbol of the input string out of range.");
-        mCurrentSymbol = &mInputString[mInputString.size() -1];
+//        mCurrentSymbol = &mInputString[mInputString.size() -1];
         return '.';
     }
     return mInputString[position];

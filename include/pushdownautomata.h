@@ -34,8 +34,8 @@ class PushdownAutomata{
 
         void setInputString(std::string inputString);
 
-        bool isAccepted(std::string inputString);
-        void runMachine(AutomataState* state, AutomataStack currentStack, bool& solutionFound, int currentSymbol);
+        bool isAccepted(std::string inputString, bool verbose = false);
+        void runMachine(AutomataState* state, AutomataStack currentStack, bool& solutionFound, int currentSymbol, bool& verbose);
 
 private:
 
@@ -45,6 +45,8 @@ private:
         void setInitialState(std::string initialState);
         void setAcceptationStates(std::string acceptationStatesIdentifiersString);
         void setTransitionFunction(std::string transitionFunctionString);
+
+        void printMachineInformation(std::string stateIdentifier, AutomataStack &currentStack, TransitionFunction &transition);
 
 
         std::set<char> createAlphabet(std::string alphabetString);
