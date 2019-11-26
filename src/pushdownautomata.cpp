@@ -259,8 +259,8 @@ void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentSta
     if(state -> acceptationState()){
         if(currentSymbol == mTape.inputSize()){
             solutionFound = true;
+            return;
         }
-        return;
     }      
 
     

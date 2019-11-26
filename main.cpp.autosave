@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         return result;
     }else{
         PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf-viernes.txt");
-        if(automata.isAccepted("aabcc", true)){
+        if(automata.isAccepted("aabcc   ", true)){
             std::cout << "Is accepted\n";
         }else std::cout << "Is not accepted\n";
 //        QApplication a(argc, argv);
