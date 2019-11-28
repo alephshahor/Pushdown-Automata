@@ -248,13 +248,8 @@ bool PushdownAutomata::isAccepted(std::string inputString, bool verbose)
 }
 
 
-int maxIterations = 0;
-
 void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentStack, bool &solutionFound, int currentSymbol, bool& verbose)
 {
-    if(maxIterations < 100){
-    maxIterations += 1;
-
     mCurrentState = state;
     if(state -> acceptationState()){
         if(currentSymbol == mTape.inputSize()){
@@ -294,7 +289,6 @@ void PushdownAutomata::runMachine(AutomataState *state, AutomataStack currentSta
             }
          }
        }
-   }
 }
 
 void PushdownAutomata::printMachineInformation(std::string stateIdentifier, AutomataStack& currentStack, TransitionFunction& transition){

@@ -115,4 +115,29 @@ TEST_CASE("Pushdown Automata input strings"){
         REQUIRE(automata.isAccepted("aaaabb") == false);
         REQUIRE(automata.isAccepted("aabbbb") == false);
     }
+
+    SECTION("Input Apf-viernes.txt"){
+        PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf-viernes.txt");
+      //  REQUIRE(automata.isAccepted("") == false);
+        REQUIRE(automata.isAccepted("ab") == false);
+        REQUIRE(automata.isAccepted("abbc") == false);
+        REQUIRE(automata.isAccepted("bc") == false);
+        REQUIRE(automata.isAccepted("abc") == true);
+        REQUIRE(automata.isAccepted("abcc") == true);
+
+    }
+
+    SECTION("Input Apf-2.txt"){
+        PushdownAutomata automata(std::string(CURRENT_DIRECTORY) + "/inputs/APf-2.txt");
+      //  REQUIRE(automata.isAccepted("") == false);
+        REQUIRE(automata.isAccepted("01") == false);
+        REQUIRE(automata.isAccepted("0101") == false);
+        REQUIRE(automata.isAccepted("0") == false);
+        REQUIRE(automata.isAccepted("1") == false);
+        REQUIRE(automata.isAccepted("01100") == false);
+        REQUIRE(automata.isAccepted("0110") == true);
+        REQUIRE(automata.isAccepted("1111") == true);
+        REQUIRE(automata.isAccepted("0000") == true);
+        REQUIRE(automata.isAccepted("1001") == true);
+    }
 }
