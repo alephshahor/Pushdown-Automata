@@ -20,18 +20,10 @@ int AutomataTape::inputSize() const
  return mInputString.size();
 }
 
-//char AutomataTape::currentSymbol() const
-//{
-//    if(mCurrentSymbol)
-//         return *mCurrentSymbol;
-//    else return '.';
-//}
 
 char AutomataTape::getSymbol(int position)
 {
     if(mInputString.size() == 0 || mInputString.size() - 1 < position){
-//        throw std::runtime_error("Error, trying to access to a symbol of the input string out of range.");
-//        mCurrentSymbol = &mInputString[mInputString.size() -1];
         return '.';
     }
     return mInputString[position];
@@ -81,7 +73,6 @@ bool AutomataTape::isInAlphabet(char symbol) const
     return false;
 }
 
-// TODO: This functions should be deleted when testing is finished.
 std::set<char> AutomataTape::alphabet() const
 {
     return mAlphabet;

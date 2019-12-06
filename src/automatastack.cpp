@@ -20,7 +20,6 @@ AutomataStack::AutomataStack()
 
 }
 
-//TODO: Handle exception
 void AutomataStack::push(char symbol)
 {
     if(isInAlphabet(symbol)){
@@ -80,7 +79,6 @@ bool AutomataStack::isInAlphabet(char symbol)
         return false;
 }
 
-// TODO: Remove this methods when testing is finished
 
 std::stack<char> AutomataStack::stack() const
 {

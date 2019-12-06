@@ -14,7 +14,6 @@ class AutomataTape{
 
     int inputSize() const;
 
-//    char currentSymbol() const;
     char getSymbol(int position);
 
     void setInputString(std::string inputString);

@@ -33,49 +33,31 @@ PushdownAutomata::PushdownAutomata(std::string programFilePath)
     std::getline(programReader_, statesIdentifiers);
     createStates(statesIdentifiers);
 
-//    std::cout << "State Identifiers: " << statesIdentifiers << "\n";
-
     std::string tapeAlphabet;
     std::getline(programReader_, tapeAlphabet);
     mTape = AutomataTape(createAlphabet(tapeAlphabet));
 
-
     std::string stackAlphabet;
     std::getline(programReader_, stackAlphabet);
-
-//    std::cout << "Stack alphabet: " << stackAlphabet << "\n";
-
 
     std::string initialStateIdentifier;
     std::getline(programReader_, initialStateIdentifier);
     setInitialState(initialStateIdentifier);
 
-//    std::cout << "Initial State Identifier: " << initialStateIdentifier << "\n";
-
     std::string initialStackSymbol;
     std::getline(programReader_, initialStackSymbol);
     mStack = AutomataStack(createAlphabet(stackAlphabet), static_cast<char>(initialStackSymbol[0]));
 
-//    std::cout << "Initial Stack Symbol: " << initialStackSymbol << "\n";
 
     std::string acceptationStatesIdentifiers;
     std::getline(programReader_, acceptationStatesIdentifiers);
     setAcceptationStates(acceptationStatesIdentifiers);
 
-//    std::cout << "Acceptation States Identifiers: " << acceptationStatesIdentifiers << "\n";
-
     std::string transitionFunction;
     while(std::getline(programReader_, transitionFunction)){
         setTransitionFunction(transitionFunction);
-//        std::cout << "Transition Function: " << transitionFunction << "\n";
     }
 
-//    for( auto state : mStates){
-//        for(auto transitionFunction : state.transitionFunctions()){
-//            std::cout << state.identifier() << ": ";
-//            transitionFunction.printTransitionFunction();
-//        }
-//    }
 }
 
 void PushdownAutomata::removeComments(std::string &program)
@@ -143,15 +125,6 @@ void PushdownAutomata::setTransitionFunction(std::string transitionFunctionStrin
     TransitionFunction t(inputSymbol, popSymbol, pushSymbols, nextStateIdentifier);
     auto state = findState(currentStateIdentifier);
     state -> insertTransitionFunction(t);
-
-//    std::cout << "Initial State: " << initialStateIdentifier << "\n";
-//    std::cout << "Input symbol: " << inputSymbol << "\n";
-//    std::cout << "Pop symbol: " << popSymbol << "\n";
-//    std::cout << "Final State: " << finalStateIdentifier << "\n";
-//    for(auto symbol : pushSymbols){
-//        std::cout << symbol << "\n";
-//    }
-//    std::cout << "\n";
 
 }
 

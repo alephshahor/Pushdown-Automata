@@ -49,9 +49,6 @@ void AutomataState::setAcceptationState(bool acceptationState)
     mAcceptationState = acceptationState;
 }
 
-
-//TODO: Remove this functions when tests are done.
-
 std::vector<TransitionFunction> AutomataState::transitionFunctions() const
 {
     return mTransitionFunctions;
